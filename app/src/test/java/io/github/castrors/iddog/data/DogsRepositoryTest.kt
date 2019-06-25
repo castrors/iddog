@@ -17,7 +17,7 @@ import retrofit2.Response
 
 class DogsRepositoryTest {
 
-    lateinit var dogsRepository: DogsRepository
+    private lateinit var dogsRepository: DogsRepository
     private val api: DogAPI = mock()
     private val fetchDogCall: Call<DogContentEntity> = mock()
     private val signUpCall: Call<UserEntity> = mock()
