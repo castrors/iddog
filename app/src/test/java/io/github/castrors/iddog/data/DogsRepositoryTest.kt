@@ -65,20 +65,6 @@ class DogsRepositoryTest {
         }
     }
 
-    @Ignore
-    @Test
-    fun givenFetchDogs_whenUnexpectedError_thenShouldThrowException() {
-        runBlocking {
-            val expectedResult = Exception("Unmapped exception")
-            whenever(api.fetchDogs()).thenAnswer { throw expectedResult }
-
-            val eitherResponse = dogsRepository.fetchDogs()
-
-            val response = (eitherResponse as Either.Left).error
-            assertEquals(response.message, expectedResult.message)
-        }
-    }
-
     @Test
     fun givenSignUp_whenResultIsSuccess_thenShouldReceiveUserEntity() {
         runBlocking {
@@ -118,21 +104,6 @@ class DogsRepositoryTest {
                     ResponseBody.create(MediaType.parse("text"), "")
                 )
             )
-
-            val eitherResponse = dogsRepository.signUp(email)
-
-            val response = (eitherResponse as Either.Left).error
-            assertEquals(response.message, expectedResult.message)
-        }
-    }
-
-    @Ignore
-    @Test
-    fun givenSignUp_whenUnexpectedError_thenShouldThrowException() {
-        runBlocking {
-            val email = "expected@email.com"
-            val expectedResult = Exception("Unmapped exception")
-            whenever(api.signUp(EmailDTO(email))).thenAnswer { throw expectedResult }
 
             val eitherResponse = dogsRepository.signUp(email)
 
