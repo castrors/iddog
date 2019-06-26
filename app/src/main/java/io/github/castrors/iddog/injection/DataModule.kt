@@ -7,6 +7,7 @@ import io.github.castrors.iddog.data.buildClient
 import io.github.castrors.iddog.domain.GetDogsUseCase
 import io.github.castrors.iddog.domain.SignUpUseCase
 import io.github.castrors.iddog.domain.base.SuspendedInteractor
+import io.github.castrors.iddog.presentation.DogsViewModel
 import io.github.castrors.iddog.presentation.SignUpViewModel
 import io.github.castrors.iddog.presentation.base.CoroutinesBuilderProvider
 import io.github.castrors.iddog.presentation.base.DefaultBuilderProvider
@@ -56,6 +57,10 @@ object DataModule{
 
         viewModel {
             SignUpViewModel(get(named(SIGN_UP_USE_CASE)), get(), get())
+        }
+
+        viewModel {
+            DogsViewModel(get(named(GET_DOGS_USE_CASE)), get(), get())
         }
 
     }

@@ -2,7 +2,7 @@ package io.github.castrors.iddog.data.model
 
 data class DogContentEntity(
     val category: String,
-    val list: List<DogEntity>
+    val list: List<String>
 ) {
 
     companion object {
