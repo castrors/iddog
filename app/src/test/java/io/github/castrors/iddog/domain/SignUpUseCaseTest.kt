@@ -7,6 +7,7 @@ import io.github.castrors.iddog.data.base.Either
 import io.github.castrors.iddog.data.model.UserEntity
 import io.github.castrors.iddog.presentation.base.ContentState
 import io.github.castrors.iddog.presentation.base.ErrorState
+import io.github.castrors.iddog.presentation.model.User
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -25,10 +26,10 @@ class SignUpUseCaseTest {
     fun givenGetDogs_whenInvokeGatewayWithSuccess_thenShouldMapDogsList() {
         runBlocking {
             val email = "expected@email.com"
-            val expectedResult = UserEntity("expected_id", "expected@email.com", "expected_token")
+            val expectedResult = User("expected_id", "expected@email.com", "expected_token")
             whenever(dogsGateway.signUp(email)).thenReturn(
                 Either.Right(
-                    expectedResult
+                    UserEntity("expected_id", "expected@email.com", "expected_token")
                 )
             )
 
