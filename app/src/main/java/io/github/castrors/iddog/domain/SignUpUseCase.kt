@@ -16,7 +16,7 @@ class SignUpUseCase(
             val result = dogsGateway.signUp(params)
             result.either(
                 { error -> ErrorState(error) },
-                { userEntity -> ContentState(userEntity.toUser()) }
+                { userEntity -> ContentState(userEntity.user.toUser()) }
             ) as UIState
         }
     }

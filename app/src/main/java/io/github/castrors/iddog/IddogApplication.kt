@@ -2,8 +2,6 @@ package io.github.castrors.iddog
 
 import android.app.Application
 import com.orhanobut.hawk.Hawk
-import io.github.castrors.iddog.data.initApi
-import io.github.castrors.iddog.injection.DataModule
 import io.github.castrors.iddog.injection.DataModule.base
 import io.github.castrors.iddog.injection.DataModule.dataModule
 import org.koin.core.context.startKoin

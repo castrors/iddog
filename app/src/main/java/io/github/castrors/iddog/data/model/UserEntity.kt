@@ -9,6 +9,7 @@ data class UserEntity(
 ) {
 
     fun toUser() = User(_id, email, token)
+
     companion object {
         fun empty() = UserEntity("invalid_id", "invalid_email", "invalid_token")
     }
