@@ -6,7 +6,7 @@ import io.github.castrors.iddog.data.DogsGateway
 import io.github.castrors.iddog.data.base.Either
 import io.github.castrors.iddog.data.model.DogContentEntity
 import io.github.castrors.iddog.data.model.DogEntity
-import io.github.castrors.iddog.presentation.Dog
+import io.github.castrors.iddog.presentation.model.Dog
 import io.github.castrors.iddog.presentation.base.ContentState
 import io.github.castrors.iddog.presentation.base.ErrorState
 import kotlinx.coroutines.runBlocking
