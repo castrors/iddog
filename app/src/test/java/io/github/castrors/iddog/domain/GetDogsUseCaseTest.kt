@@ -5,10 +5,9 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.github.castrors.iddog.data.DogsGateway
 import io.github.castrors.iddog.data.base.Either
 import io.github.castrors.iddog.data.model.DogContentEntity
-import io.github.castrors.iddog.data.model.DogEntity
-import io.github.castrors.iddog.presentation.model.Dog
 import io.github.castrors.iddog.presentation.base.ContentState
 import io.github.castrors.iddog.presentation.base.ErrorState
+import io.github.castrors.iddog.presentation.model.Dog
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
@@ -25,11 +24,11 @@ class GetDogsUseCaseTest {
     }
 
     @Test
-    fun givenGetDogs_whenInvokeGatewayWithSuccess_thenShouldMapDogsList(){
+    fun givenGetDogs_whenInvokeGatewayWithSuccess_thenShouldMapDogsList() {
         runBlocking {
             val category = "husky"
             val expectedResult = listOf(Dog("url"))
-            whenever(dogsGateway.fetchDogs(category)).thenReturn(Either.Right(DogContentEntity("husky", listOf(DogEntity("url")))))
+            whenever(dogsGateway.fetchDogs(category)).thenReturn(Either.Right(DogContentEntity("husky", listOf("url"))))
 
             val uiState = getDogsUseCase.run(category)
             val contentState = uiState as ContentState
@@ -39,7 +38,7 @@ class GetDogsUseCaseTest {
     }
 
     @Test
-    fun givenGetDogs_whenInvokeGatewayWithFailure_thenShouldReturnErrorState(){
+    fun givenGetDogs_whenInvokeGatewayWithFailure_thenShouldReturnErrorState() {
         runBlocking {
             val category = "husky"
             val expectedResult = Exception("Unmapped exception")

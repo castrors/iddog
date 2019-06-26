@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.github.castrors.iddog.data.DogsGateway
 import io.github.castrors.iddog.data.base.Either
+import io.github.castrors.iddog.data.model.UserDTO
 import io.github.castrors.iddog.data.model.UserEntity
 import io.github.castrors.iddog.presentation.base.ContentState
 import io.github.castrors.iddog.presentation.base.ErrorState
@@ -29,7 +30,7 @@ class SignUpUseCaseTest {
             val expectedResult = User("expected_id", "expected@email.com", "expected_token")
             whenever(dogsGateway.signUp(email)).thenReturn(
                 Either.Right(
-                    UserEntity("expected_id", "expected@email.com", "expected_token")
+                    UserDTO(UserEntity("expected_id", "expected@email.com", "expected_token"))
                 )
             )
 
