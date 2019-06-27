@@ -15,15 +15,13 @@ class DogsViewModel(
     coroutineContext: CoroutineContext
 ) : CoroutineAwareViewModel(coroutineContext) {
 
-    private val dogsData: MutableLiveData<UIState> = MutableLiveData()
+    val dogsData: MutableLiveData<UIState> = MutableLiveData()
 
-    fun fetchDogs(category: String): LiveData<UIState> {
+    fun fetchDogs(category: String = "husky"){
         dogsData.postValue(LoadingState)
         coroutinesBuilderProvider.launch(main){
             dogsData.postValue(getDogsUseCase.run(category))
         }
-
-        return dogsData
     }
 
 }
