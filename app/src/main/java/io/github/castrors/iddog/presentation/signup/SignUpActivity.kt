@@ -2,7 +2,10 @@ package io.github.castrors.iddog.presentation.signup
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import androidx.lifecycle.Observer
+import com.google.android.material.textfield.TextInputEditText
 import io.github.castrors.iddog.R
 import io.github.castrors.iddog.data.SessionRepository
 import io.github.castrors.iddog.presentation.base.ContentState
@@ -22,18 +25,26 @@ class SignUpActivity : AppCompatActivity() {
 
 
         buttonSubmit.setOnClickListener {
-            signUpViewModel.signUp(editEmail.text.toString()).observe(this, Observer<UIState> {
-                when(it){
-                    is ContentState -> {
-                        saveToken(it.content as User)
-                        finish()
+            if(editEmail.isValidEmail()){
+                signUpViewModel.signUp(editEmail.text.toString()).observe(this, Observer<UIState> {
+                    when(it){
+                        is ContentState -> {
+                            saveToken(it.content as User)
+                            finish()
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                inputLayout.error = getString(R.string.invalid_email)
+            }
         }
     }
 
     private fun saveToken(user: User) {
         SessionRepository.token = user.token
     }
+}
+
+private fun TextInputEditText.isValidEmail() : Boolean{
+    return (!TextUtils.isEmpty(this.text) && Patterns.EMAIL_ADDRESS.matcher(this.text).matches())
 }

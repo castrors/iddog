@@ -7,4 +7,5 @@
     <string name="hound">Hound</string>
     <string name="pug">Pug</string>
     <string name="labrador">Labrador</string>
+    <string name="invalid_email">E-mail inválido</string>
 </resources>
