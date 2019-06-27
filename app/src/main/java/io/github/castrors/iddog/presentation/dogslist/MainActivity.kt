@@ -11,6 +11,7 @@ import io.github.castrors.iddog.data.SessionRepository
 import io.github.castrors.iddog.presentation.signup.SignUpActivity
 import io.github.castrors.iddog.presentation.base.ContentState
 import io.github.castrors.iddog.presentation.base.UIState
+import io.github.castrors.iddog.presentation.dogdetail.DogDetailActivity
 import io.github.castrors.iddog.presentation.model.Dog
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             )
         }.apply {
             withListener {
-                Toast.makeText(this@MainActivity, it.url, Toast.LENGTH_SHORT)
+                DogDetailActivity.navigateToDogDetail(this@MainActivity, it)
             }
         }
     }
