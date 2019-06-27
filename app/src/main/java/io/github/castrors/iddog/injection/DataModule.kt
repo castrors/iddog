@@ -7,8 +7,8 @@ import io.github.castrors.iddog.data.buildClient
 import io.github.castrors.iddog.domain.GetDogsUseCase
 import io.github.castrors.iddog.domain.SignUpUseCase
 import io.github.castrors.iddog.domain.base.SuspendedInteractor
-import io.github.castrors.iddog.presentation.DogsViewModel
-import io.github.castrors.iddog.presentation.SignUpViewModel
+import io.github.castrors.iddog.presentation.dogslist.DogsViewModel
+import io.github.castrors.iddog.presentation.signup.SignUpViewModel
 import io.github.castrors.iddog.presentation.base.CoroutinesBuilderProvider
 import io.github.castrors.iddog.presentation.base.DefaultBuilderProvider
 import io.github.castrors.iddog.presentation.base.UIState

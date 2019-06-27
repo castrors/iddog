@@ -1,4 +1,4 @@
-package io.github.castrors.iddog.presentation
+package io.github.castrors.iddog.presentation.dogslist
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.castrors.iddog.R
 import io.github.castrors.iddog.data.SessionRepository
+import io.github.castrors.iddog.presentation.signup.SignUpActivity
 import io.github.castrors.iddog.presentation.base.ContentState
 import io.github.castrors.iddog.presentation.base.UIState
 import io.github.castrors.iddog.presentation.model.Dog
@@ -19,7 +19,11 @@ class MainActivity : AppCompatActivity() {
 
     private val dogsViewModel: DogsViewModel by viewModel()
     private val adapter: DogsListAdapter<Dog, ItemDogView> by lazy {
-        DogsListAdapter { ItemDogView(it) }.apply {
+        DogsListAdapter {
+            ItemDogView(
+                it
+            )
+        }.apply {
             withListener {
                 Toast.makeText(this@MainActivity, it.url, Toast.LENGTH_SHORT)
             }

@@ -1,4 +1,4 @@
-package io.github.castrors.iddog.presentation
+package io.github.castrors.iddog.presentation.dogslist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

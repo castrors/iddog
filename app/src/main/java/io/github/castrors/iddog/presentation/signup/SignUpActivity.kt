@@ -1,11 +1,8 @@
-package io.github.castrors.iddog.presentation
+package io.github.castrors.iddog.presentation.signup
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.orhanobut.hawk.Hawk
 import io.github.castrors.iddog.R
 import io.github.castrors.iddog.data.SessionRepository
 import io.github.castrors.iddog.presentation.base.ContentState
