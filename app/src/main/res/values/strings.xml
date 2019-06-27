@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">iddog</string>
     <string name="email_label">E-mail</string>
-    <string name="email_hint">email@email.com</string>
     <string name="sign_up">Registrar</string>
     <string name="husky">Husky</string>
     <string name="hound">Hound</string>
