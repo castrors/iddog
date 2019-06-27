@@ -54,6 +54,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
+    testImplementation 'org.koin:koin-test:2.0.1'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
@@ -61,5 +62,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test:core:1.1.0'
     androidTestImplementation 'androidx.test:core-ktx:1.1.0'
+    androidTestImplementation 'org.koin:koin-test:2.0.1'
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
 
 }
