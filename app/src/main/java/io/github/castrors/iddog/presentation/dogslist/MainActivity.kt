@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupView()
+        observeDogs()
     }
 
     private fun setupView() {
@@ -54,12 +55,14 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onResume() {
         super.onResume()
 
-        if (userIsRegistered()) {
-            observeDogs()
-        } else {
+        if (!userIsRegistered()) {
             startActivity(Intent(this, SignUpActivity::class.java))
+        } else if(isListEmpty()){
+            onNavigationItemSelected(bottomNavigation.menu.findItem(bottomNavigation.selectedItemId))
         }
     }
+
+    private fun isListEmpty() = adapter.itemCount == 0
 
     private fun observeDogs() {
         dogsViewModel.dogsData.observe(this, Observer<UIState> {
@@ -70,7 +73,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 }
             }
         })
-        dogsViewModel.fetchDogs()
     }
 
     private fun userIsRegistered(): Boolean {
