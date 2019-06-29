@@ -55,9 +55,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onResume() {
         super.onResume()
 
-        if (!userIsRegistered()) {
-            startActivity(Intent(this, SignUpActivity::class.java))
-        } else if(isListEmpty()){
+        if(isListEmpty()){
             onNavigationItemSelected(bottomNavigation.menu.findItem(bottomNavigation.selectedItemId))
         }
     }
@@ -65,6 +63,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private fun isListEmpty() = adapter.itemCount == 0
 
     private fun observeDogs() {
+        dogsViewModel.shouldRequestDogs().observe(this, Observer<Boolean>{isAuthenticated ->
+            if(!isAuthenticated){
+                startActivity(Intent(this, SignUpActivity::class.java))
+            }
+        })
+
         dogsViewModel.dogsData.observe(this, Observer<UIState> {
             when (it) {
                 is ContentState -> {
@@ -73,9 +77,5 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 }
             }
         })
-    }
-
-    private fun userIsRegistered(): Boolean {
-        return SessionRepository.token.isNotEmpty()
     }
 }

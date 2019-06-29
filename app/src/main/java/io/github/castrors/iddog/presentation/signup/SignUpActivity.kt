@@ -41,7 +41,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun saveToken(user: User) {
-        SessionRepository.token = user.token
+        signUpViewModel.persistToken(user.token)
     }
 }
 

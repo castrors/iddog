@@ -7,9 +7,11 @@ import timber.log.Timber
 
 private lateinit var okHttpClient: OkHttpClient
 
-fun buildClient(): OkHttpClient {
+fun buildClient(
+    sessionGateway: SessionGateway
+): OkHttpClient {
     return if (::okHttpClient.isInitialized.not()) {
-        val auth = AuthInterceptor()
+        val auth = AuthInterceptor(sessionGateway)
         val logging = HttpLoggingInterceptor { Timber.i(it) }.setLevel(Level.BODY)
 
         okHttpClient = OkHttpClient.Builder()

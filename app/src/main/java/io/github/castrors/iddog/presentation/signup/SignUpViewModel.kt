@@ -2,6 +2,8 @@ package io.github.castrors.iddog.presentation.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import io.github.castrors.iddog.domain.PersistTokenUseCase
+import io.github.castrors.iddog.domain.base.Interactor
 import io.github.castrors.iddog.domain.base.SuspendedInteractor
 import io.github.castrors.iddog.presentation.base.CoroutineAwareViewModel
 import io.github.castrors.iddog.presentation.base.CoroutinesBuilderProvider
@@ -11,6 +13,7 @@ import kotlin.coroutines.CoroutineContext
 
 class SignUpViewModel(
     private val signUpUseCase: SuspendedInteractor<String, UIState>,
+    private val persistTokenUseCase: Interactor<String, Boolean>,
     private val coroutinesBuilderProvider: CoroutinesBuilderProvider,
     coroutineContext: CoroutineContext
 ) : CoroutineAwareViewModel(coroutineContext) {
@@ -24,6 +27,10 @@ class SignUpViewModel(
         }
 
         return signUpData
+    }
+
+    fun persistToken(token: String): Boolean{
+        return persistTokenUseCase.run(token)
     }
 
 }

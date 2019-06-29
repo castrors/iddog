@@ -1,11 +1,9 @@
 package io.github.castrors.iddog.injection
 
-import io.github.castrors.iddog.data.DogAPI
-import io.github.castrors.iddog.data.DogsGateway
-import io.github.castrors.iddog.data.DogsRepository
-import io.github.castrors.iddog.data.buildClient
-import io.github.castrors.iddog.domain.GetDogsUseCase
-import io.github.castrors.iddog.domain.SignUpUseCase
+import io.github.castrors.iddog.data.*
+import io.github.castrors.iddog.domain.*
+import io.github.castrors.iddog.domain.base.Interactor
+import io.github.castrors.iddog.domain.base.None
 import io.github.castrors.iddog.domain.base.SuspendedInteractor
 import io.github.castrors.iddog.presentation.dogslist.DogsViewModel
 import io.github.castrors.iddog.presentation.signup.SignUpViewModel
@@ -25,6 +23,10 @@ object DataModule{
 
     private const val SIGN_UP_USE_CASE = "SIGN_UP_USE_CASE"
     private const val GET_DOGS_USE_CASE = "GET_DOGS_USE_CASE"
+    private const val IS_USER_AUTHENTICATED_USE_CASE = "IS_USER_AUTHENTICATED_USE_CASE"
+    private const val PERSIST_TOKEN_USE_CASE = "PERSIST_TOKEN_USE_CASE"
+    private const val PROVIDE_TOKEN_USE_CASE = "PROVIDE_TOKEN_USE_CASE"
+
 
     val base = module {
         factory<CoroutinesBuilderProvider> { DefaultBuilderProvider() }
@@ -33,8 +35,10 @@ object DataModule{
 
     val dataModule = module{
 
+        single<SessionGateway> { SessionRepository() }
+
         factory {
-            buildClient()
+            buildClient(get())
         }
 
         single<DogAPI> { Retrofit.Builder()
@@ -55,12 +59,20 @@ object DataModule{
             GetDogsUseCase(get())
         }
 
-        viewModel {
-            SignUpViewModel(get(named(SIGN_UP_USE_CASE)), get(), get())
+        factory<Interactor<None, Boolean>>(named(IS_USER_AUTHENTICATED_USE_CASE)){
+            IsUserAuthenticatedUseCase(get())
+        }
+
+        factory<Interactor<String, Boolean>>(named(PERSIST_TOKEN_USE_CASE)){
+            PersistTokenUseCase(get())
         }
 
         viewModel {
-            DogsViewModel(get(named(GET_DOGS_USE_CASE)), get(), get())
+            SignUpViewModel(get(named(SIGN_UP_USE_CASE)), get(named(PERSIST_TOKEN_USE_CASE)), get(), get())
+        }
+
+        viewModel {
+            DogsViewModel(get(named(GET_DOGS_USE_CASE)), get(named(IS_USER_AUTHENTICATED_USE_CASE)), get(), get())
         }
 
     }
