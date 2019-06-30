@@ -1,5 +1,7 @@
 # iddog
 
+![Apresentação app](https://github.com/castrors/iddog/raw/master/images/app.gif)
+
 
 ## Requisitos de negócio:
 
