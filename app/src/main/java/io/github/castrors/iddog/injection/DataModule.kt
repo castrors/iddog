@@ -5,11 +5,11 @@ import io.github.castrors.iddog.domain.*
 import io.github.castrors.iddog.domain.base.Interactor
 import io.github.castrors.iddog.domain.base.None
 import io.github.castrors.iddog.domain.base.SuspendedInteractor
-import io.github.castrors.iddog.presentation.dogslist.DogsViewModel
-import io.github.castrors.iddog.presentation.signup.SignUpViewModel
 import io.github.castrors.iddog.presentation.base.CoroutinesBuilderProvider
 import io.github.castrors.iddog.presentation.base.DefaultBuilderProvider
 import io.github.castrors.iddog.presentation.base.UIState
+import io.github.castrors.iddog.presentation.dogslist.DogsViewModel
+import io.github.castrors.iddog.presentation.signup.SignUpViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -26,7 +26,7 @@ object DataModule {
     private const val GET_DOGS_USE_CASE = "GET_DOGS_USE_CASE"
     private const val IS_USER_AUTHENTICATED_USE_CASE = "IS_USER_AUTHENTICATED_USE_CASE"
     private const val PERSIST_TOKEN_USE_CASE = "PERSIST_TOKEN_USE_CASE"
-    private const val PROVIDE_TOKEN_USE_CASE = "PROVIDE_TOKEN_USE_CASE"
+    private const val SIGN_OUT_USE_CASE = "SIGN_OUT_USE_CASE"
 
 
     val base = module {
@@ -65,6 +65,10 @@ object DataModule {
             IsUserAuthenticatedUseCase(get())
         }
 
+        factory<Interactor<None, Boolean>>(named(SIGN_OUT_USE_CASE)) {
+            SignOutUseCase(get())
+        }
+
         factory<Interactor<String, Boolean>>(named(PERSIST_TOKEN_USE_CASE)) {
             PersistTokenUseCase(get())
         }
@@ -74,7 +78,13 @@ object DataModule {
         }
 
         viewModel {
-            DogsViewModel(get(named(GET_DOGS_USE_CASE)), get(named(IS_USER_AUTHENTICATED_USE_CASE)), get(), get())
+            DogsViewModel(
+                get(named(GET_DOGS_USE_CASE)),
+                get(named(IS_USER_AUTHENTICATED_USE_CASE)),
+                get(named(SIGN_OUT_USE_CASE)),
+                get(),
+                get()
+            )
         }
 
     }

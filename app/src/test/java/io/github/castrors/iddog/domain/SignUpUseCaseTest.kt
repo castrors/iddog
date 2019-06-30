@@ -24,7 +24,7 @@ class SignUpUseCaseTest {
     }
 
     @Test
-    fun givenGetDogs_whenInvokeGatewayWithSuccess_thenShouldMapDogsList() {
+    fun givenSignUp_whenInvokeGatewayWithSuccess_thenShouldMapUserEntity() {
         runBlocking {
             val email = "expected@email.com"
             val expectedResult = User("expected_id", "expected@email.com", "expected_token")
@@ -42,7 +42,7 @@ class SignUpUseCaseTest {
     }
 
     @Test
-    fun givenGetDogs_whenInvokeGatewayWithFailure_thenShouldReturnErrorState() {
+    fun givenSignUp_whenInvokeGatewayWithFailure_thenShouldReturnErrorState() {
         runBlocking {
             val email = "expected@email.com"
             val expectedResult = Exception("Unmapped exception")

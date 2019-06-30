@@ -2,21 +2,21 @@ package io.github.castrors.iddog.presentation.dogslist
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.castrors.iddog.R
-import io.github.castrors.iddog.data.SessionRepository
-import io.github.castrors.iddog.presentation.signup.SignUpActivity
 import io.github.castrors.iddog.presentation.base.ContentState
 import io.github.castrors.iddog.presentation.base.UIState
 import io.github.castrors.iddog.presentation.dogdetail.DogDetailActivity
 import io.github.castrors.iddog.presentation.model.Dog
+import io.github.castrors.iddog.presentation.signup.SignUpActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
@@ -42,6 +42,21 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setContentView(R.layout.activity_main)
         setupView()
         observeDogs()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.sign_out -> {
+                dogsViewModel.signOut()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setupView() {

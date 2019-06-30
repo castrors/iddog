@@ -15,6 +15,7 @@ import kotlin.coroutines.CoroutineContext
 class DogsViewModel(
     private val getDogsUseCase: SuspendedInteractor<String, UIState>,
     private val isUserAuthenticatedUseCase: Interactor<None, Boolean>,
+    private val signOutUseCase: Interactor<None, Boolean>,
     private val coroutinesBuilderProvider: CoroutinesBuilderProvider,
     coroutineContext: CoroutineContext
 ) : CoroutineAwareViewModel(coroutineContext) {
@@ -32,6 +33,10 @@ class DogsViewModel(
     fun shouldRequestDogs(): LiveData<Boolean>{
         shouldRequestDogs.postValue(isUserAuthenticatedUseCase.run(None))
         return shouldRequestDogs
+    }
+
+    fun signOut(){
+        shouldRequestDogs.postValue(!signOutUseCase.run(None))
     }
 
 }

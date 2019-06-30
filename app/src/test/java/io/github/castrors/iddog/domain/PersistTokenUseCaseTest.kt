@@ -20,7 +20,7 @@ class PersistTokenUseCaseTest {
     }
 
     @Test
-    fun givenPersistToken_whenInvokeGatewayWithSuccess_thenShouldMapDogsList() {
+    fun givenPersistToken_whenInvokeGatewayWithSuccess_thenShouldReturn() {
 
         val token = "token"
         val expectedResult = true
@@ -33,7 +33,7 @@ class PersistTokenUseCaseTest {
     }
 
     @Test
-    fun givenPersistToken_whenInvokeGatewayWithFailure_thenShouldReturnErrorState() {
+    fun givenPersistToken_whenInvokeGatewayWithFailure_thenShouldReturnFalse() {
         val token = "token"
         val expectedResult = false
         whenever(sessionGateway.persistToken(token)).thenReturn(false)
