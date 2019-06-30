@@ -4,6 +4,7 @@ import android.app.Application
 import com.orhanobut.hawk.Hawk
 import io.github.castrors.iddog.injection.DataModule.base
 import io.github.castrors.iddog.injection.DataModule.dataModule
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
@@ -16,6 +17,7 @@ class IddogApplication : Application() {
         }
         Hawk.init(this).build()
         startKoin {
+            androidContext(this@IddogApplication)
             modules(listOf(base, dataModule))
         }
     }
